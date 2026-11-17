@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oscar Casahuaman | Redes y Telecomunicaciones</title>
+<meta name="description" content="Blog y portafolio de Oscar Enrique Casahuaman Pinedo, experto en Redes y Telecomunicaciones y desarrollo web.">
+<meta name="theme-color" content="#0b1120">
+<style>
+:root{
+  --bg:#0b1120; --bg2:#111a2e; --card:#16213a; --glass:rgba(17,26,46,.82);
+  --text:#f1f5f9; --muted:#94a3b8; --accent:#38bdf8; --accent2:#818cf8; --accent-ink:#06223a;
+  --border:#26344f; --tag:rgba(56,189,248,.14); --ok:#22c55e; --danger:#f87171;
+  --shadow:0 14px 34px -14px rgba(0,0,0,.65);
+  --grad:linear-gradient(135deg,#38bdf8,#818cf8);
+}
+[data-theme="light"]{
+  --bg:#f5f8fc; --bg2:#eaf0f8; --card:#ffffff; --glass:rgba(255,255,255,.88);
+  --text:#0f172a; --muted:#52627a; --accent:#0369a1; --accent2:#4f46e5; --accent-ink:#ffffff;
+  --border:#dbe4f0; --tag:rgba(3,105,161,.09); --ok:#15803d; --danger:#dc2626;
+  --shadow:0 12px 28px -14px rgba(15,23,42,.18);
+  --grad:linear-gradient(135deg,#0369a1,#4f46e5);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.65;transition:background .3s,color .3s}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.4rem}
+
+/* progress + nav */
+#scrollBar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:300}
+nav{position:sticky;top:0;z-index:200;background:var(--glass);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;padding:.8rem 0}
+.logo{font-weight:800;font-size:1.2rem;text-decoration:none;letter-spacing:-.5px}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:1.1rem}
+.nav-links a.l{color:var(--muted);text-decoration:none;font-size:.93rem;font-weight:500;transition:color .2s}
+.nav-links a.l:hover,.nav-links a.l.on{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:10px;font-weight:600;font-size:.9rem;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text);padding:.55rem 1rem;text-decoration:none;transition:all .2s}
+.btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.btn.p{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.p:hover{filter:brightness(1.1);color:var(--accent-ink)}
+.btn.sm{padding:.4rem .75rem;font-size:.82rem}
+.btn.wa{background:#25d366;color:#05250f;border-color:#25d366}
+.btn.wa:hover{color:#05250f;filter:brightness(1.08)}
+.burger{display:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:2.6rem;align-items:center;padding:4rem 0 2.5rem}
+.avatar-box{position:relative}
+.avatar{width:180px;height:180px;border-radius:28px;object-fit:cover;border:3px solid var(--accent);box-shadow:var(--shadow);display:block}
+.avatar-fb{width:180px;height:180px;border-radius:28px;border:3px solid var(--accent);background:var(--grad);color:#fff;font-size:3.4rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.badge{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--border);padding:.25rem .8rem;border-radius:20px;font-size:.74rem;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.eyebrow{color:var(--accent);font-weight:700;font-size:.95rem;letter-spacing:.4px}
+.hero h1{font-size:clamp(1.9rem,4.6vw,2.9rem);line-height:1.15;margin:.35rem 0 .3rem;font-weight:800}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fullname{color:var(--muted);font-size:.95rem;margin-bottom:.8rem}
+.bio{color:var(--muted);max-width:660px;margin-bottom:1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.7rem}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.3rem}
+.chip{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.3rem .85rem;font-size:.8rem;color:var(--muted)}
+.chip b{color:var(--text)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin:1rem 0 .5rem}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;text-align:center}
+.stat .n{font-size:1.7rem;font-weight:800;color:var(--accent)}
+.stat .t{font-size:.82rem;color:var(--muted)}
+
+/* sections */
+section{padding:2.4rem 0}
+.sh{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:.6rem;margin-bottom:1.4rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
+.sh h2{font-size:1.55rem}
+.sh p{color:var(--muted);font-size:.92rem}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;box-shadow:var(--shadow);transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.ico{font-size:1.7rem;margin-bottom:.5rem}
+.card h3{font-size:1.08rem;margin-bottom:.4rem}
+.card p{color:var(--muted);font-size:.92rem}
+.card .more{display:inline-block;margin-top:.8rem;color:var(--accent);font-weight:600;font-size:.88rem;text-decoration:none}
+.card .more:hover{text-decoration:underline}
+
+/* blog */
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.cats{display:flex;flex-wrap:wrap;gap:.5rem}
+.cat{background:var(--card);color:var(--muted);border:1px solid var(--border);padding:.4rem .9rem;border-radius:20px;cursor:pointer;font-size:.84rem;font-weight:500;transition:all .2s}
+.cat:hover,.cat.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.search{background:var(--card);border:1px solid var(--border);color:var(--text);padding:.5rem 1rem;border-radius:10px;width:260px;font-size:.9rem;outline:none}
+.search:focus{border-color:var(--accent)}
+.posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.4rem}
+.post{display:flex;flex-direction:column;justify-content:space-between}
+.pm{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;font-size:.78rem}
+.tag{background:var(--tag);color:var(--accent);padding:.2rem .65rem;border-radius:6px;font-weight:600}
+.date{color:var(--muted)}
+.post h3{font-size:1.18rem;line-height:1.35;margin-bottom:.6rem}
+.post .ex{color:var(--muted);font-size:.92rem;margin-bottom:1.2rem}
+.pf{display:flex;justify-content:space-between;align-items:center;padding-top:.9rem;border-top:1px solid var(--border);gap:.5rem}
+.rt{font-size:.78rem;color:var(--muted)}
+.link{background:none;border:none;color:var(--accent);font-weight:600;font-size:.88rem;cursor:pointer}
+.link:hover{text-decoration:underline}
+.link.del{color:var(--danger)}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem}
+
+/* resources */
+.res a{display:flex;gap:.9rem;align-items:flex-start;text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;transition:all .2s}
+.res a:hover{border-color:var(--accent);transform:translateY(-3px)}
+.res .ri{font-size:1.4rem}
+.res b{display:block;font-size:.98rem}
+.res small{color:var(--muted);font-size:.84rem;display:block}
+.res .ext{margin-left:auto;color:var(--accent);font-size:.9rem}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.group-t{margin:1.5rem 0 .8rem;font-size:1.02rem;color:var(--accent)}
+
+/* tool */
+.tool{display:grid;grid-template-columns:1fr 1.2fr;gap:1.6rem}
+.field label{display:block;font-size:.86rem;font-weight:600;margin-bottom:.35rem}
+.field{margin-bottom:1rem}
+.field input,.field select,.field textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:.65rem .9rem;border-radius:10px;font-size:.95rem;font-family:inherit}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+.field textarea{min-height:140px;resize:vertical}
+.row{display:flex;gap:.7rem}
+.res-tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.res-tbl td{padding:.5rem .3rem;border-bottom:1px solid var(--border)}
+.res-tbl td:first-child{color:var(--muted);width:42%}
+.res-tbl td:last-child{font-family:ui-monospace,Consolas,monospace;font-weight:600}
+.err{color:var(--danger);font-size:.88rem;margin-top:.5rem;min-height:1.2em}
+
+/* about + contact */
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:1.6rem}
+.about p{color:var(--muted);margin-bottom:.9rem}
+.skills{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.6rem}
+.skill{background:var(--bg);border:1px solid var(--border);padding:.38rem .8rem;border-radius:8px;font-size:.84rem;font-weight:500}
+.info li{list-style:none;display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:.94rem}
+.info li:last-child{border:none}
+.info span{color:var(--muted);min-width:110px}
+.bday{margin-top:1rem;background:var(--tag);border:1px dashed var(--accent);border-radius:12px;padding:.8rem 1rem;font-size:.92rem}
+.bday b{color:var(--accent)}
+
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(2,6,23,.72);backdrop-filter:blur(4px);display:none;justify-content:center;align-items:center;padding:1.2rem;z-index:400}
+.ov.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;padding:2rem;position:relative;box-shadow:0 30px 60px -15px rgba(0,0,0,.6)}
+.x{position:absolute;top:1rem;right:1rem;background:var(--bg);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem}
+.x:hover{border-color:var(--accent);color:var(--accent)}
+.modal h2{font-size:1.7rem;line-height:1.3;margin-right:2.4rem}
+.body{margin-top:1.3rem;font-size:1.04rem;line-height:1.8}
+.body p{margin-bottom:1.1rem}
+.body h4{margin:1.4rem 0 .5rem;color:var(--accent)}
+.body ul{margin:0 0 1.1rem 1.3rem}
+.body a{color:var(--accent)}
+.body code{background:var(--bg);padding:.1rem .4rem;border-radius:5px;font-size:.9em;color:var(--accent)}
+.body pre{background:var(--bg);border:1px solid var(--border);padding:1rem;border-radius:10px;overflow-x:auto;font-size:.88rem;margin:1.1rem 0;color:var(--accent);font-family:ui-monospace,Consolas,monospace}
+.mfoot{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+
+footer{border-top:1px solid var(--border);margin-top:3rem;padding:2.5rem 0;color:var(--muted);font-size:.9rem}
+.fgrid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.2rem}
+.fgrid a{color:var(--muted);text-decoration:none;margin-right:1rem}
+.fgrid a:hover{color:var(--accent)}
+
+#toTop{position:fixed;right:1.2rem;bottom:1.2rem;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--accent);cursor:pointer;font-size:1.1rem;display:none;z-index:150;box-shadow:var(--shadow)}
+#toTop.show{display:block}
+#toast{position:fixed;left:50%;bottom:1.6rem;transform:translate(-50%,30px);background:var(--accent);color:var(--accent-ink);padding:.6rem 1.1rem;border-radius:10px;font-weight:600;font-size:.9rem;opacity:0;pointer-events:none;transition:all .3s;z-index:600}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;text-align:center;justify-items:center;padding-top:2.5rem}
+  .actions,.chips{justify-content:center}
+  .about,.tool{grid-template-columns:1fr}
+  .search{width:100%}
+  .burger{display:inline-flex}
+  .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:.5rem 1.4rem 1rem;display:none}
+  .nav-links.open{display:flex}
+  .nav-links a.l{padding:.7rem 0;border-bottom:1px solid var(--border)}
+  .nav-links .btn{margin-top:.6rem}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="scrollBar"></div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#inicio" class="logo">Oscar<span>.dev</span></a>
+    <button class="btn sm burger" id="burger" aria-label="Abrir menú">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a class="l" href="#inicio">Inicio</a>
+      <a class="l" href="#especialidad">Especialidad</a>
+      <a class="l" href="#articulos">Artículos</a>
+      <a class="l" href="#herramienta">Herramienta</a>
+      <a class="l" href="#recursos">Recursos</a>
+      <a class="l" href="#sobre-mi">Sobre mí</a>
+      <a class="l" href="#contacto">Contacto</a>
+      <button class="btn sm" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema claro u oscuro">🌙 Oscuro</button>
+      <button class="btn p sm" id="writeBtn">＋ Escribir</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- INICIO -->
+<header class="hero" id="inicio">
+  <div class="avatar-box">
+    <img src="foto.jpg" alt="Oscar Casahuaman" class="avatar" id="avatarImg">
+    <div class="badge"><span class="dot"></span> Disponible para proyectos</div>
+  </div>
+  <div>
+    <p class="eyebrow">Experto en Redes y Telecomunicaciones</p>
+    <h1>Hola, soy <em>Oscar Casahuaman</em></h1>
+    <p class="fullname">Casahuaman Pinedo, Oscar Enrique</p>
+    <p class="bio">Bienvenido a mi espacio personal. Aquí comparto guías sobre redes, telecomunicaciones, desarrollo web y despliegue de proyectos, además de herramientas y recursos que uso en mi trabajo diario.</p>
+    <div class="actions">
+      <a class="btn p" href="#articulos">Leer artículos</a>
+      <a class="btn wa" id="waHero" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="btn" href="tel:+51987152262">📞 987 152 262</a>
+      <a class="btn" href="https://github.com/OscarCasahuaman1993" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <div class="chips">
+      <span class="chip">🎂 Cumpleaños: <b>24 de agosto</b></span>
+      <span class="chip">📍 Perú</span>
+      <span class="chip">📡 Redes · Telecom · Web</span>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="n" id="stPosts">0</div><div class="t">Artículos publicados</div></div>
+  <div class="stat"><div class="n" id="stCats">0</div><div class="t">Categorías</div></div>
+  <div class="stat"><div class="n">12</div><div class="t">Recursos recomendados</div></div>
+  <div class="stat"><div class="n" id="stBday">–</div><div class="t">Días para mi cumpleaños</div></div>
+</div>
+
+<!-- ESPECIALIDAD -->
+<section id="especialidad">
+  <div class="sh"><div><h2>Mi especialidad</h2><p>Áreas de trabajo en redes y telecomunicaciones.</p></div></div>
+  <div class="grid3">
+    <div class="card"><div class="ico">🌐</div><h3>Redes LAN / WAN</h3><p>Diseño, direccionamiento IP, VLAN, enrutamiento y conmutación para redes de oficina y de campus.</p><a class="more" href="https://www.netacad.com/" target="_blank" rel="noopener">Cisco Networking Academy ↗</a></div>
+    <div class="card"><div class="ico">📡</div><h3>Telecomunicaciones</h3><p>Enlaces inalámbricos, radioenlaces, fibra óptica y sistemas de transmisión de datos y voz.</p><a class="more" href="https://www.itu.int/es/Pages/default.aspx" target="_blank" rel="noopener">UIT – Telecomunicaciones ↗</a></div>
+    <div class="card"><div class="ico">🔐</div><h3>Seguridad de red</h3><p>Firewalls, VPN, segmentación y buenas prácticas para proteger la infraestructura.</p><a class="more" href="https://www.cloudflare.com/es-es/learning/security/what-is-network-security/" target="_blank" rel="noopener">Qué es la seguridad de red ↗</a></div>
+    <div class="card"><div class="ico">🔍</div><h3>Monitoreo y diagnóstico</h3><p>Análisis de tráfico, medición de latencia y solución de fallas con herramientas profesionales.</p><a class="more" href="https://www.wireshark.org/" target="_blank" rel="noopener">Wireshark ↗</a></div>
+    <div class="card"><div class="ico">🛰️</div><h3>Equipos y configuración</h3><p>Configuración de routers, switches y puntos de acceso de distintos fabricantes.</p><a class="more" href="https://help.mikrotik.com/docs/" target="_blank" rel="noopener">Documentación MikroTik ↗</a></div>
+    <div class="card"><div class="ico">💻</div><h3>Desarrollo web</h3><p>Interfaces limpias con HTML, CSS y JavaScript, y despliegue continuo con GitHub y Vercel.</p><a class="more" href="https://developer.mozilla.org/es/" target="_blank" rel="noopener">MDN Web Docs ↗</a></div>
+  </div>
+</section>
+
+<!-- ARTICULOS -->
+<section id="articulos">
+  <div class="sh"><div><h2>Artículos</h2><p>Guías y apuntes. Usa los filtros o el buscador.</p></div></div>
+  <div class="bar">
+    <div class="cats" id="cats"></div>
+    <input type="search" id="search" class="search" placeholder="Buscar artículos...">
+  </div>
+  <div class="posts" id="posts"></div>
+</section>
+
+<!-- HERRAMIENTA -->
+<section id="herramienta">
+  <div class="sh"><div><h2>Calculadora de subredes IPv4</h2><p>Ingresa una IP y un prefijo CIDR para obtener red, broadcast y rango de hosts.</p></div></div>
+  <div class="card tool" style="transform:none">
+    <form id="subnetForm">
+      <div class="field"><label for="ipIn">Dirección IP</label><input id="ipIn" value="192.168.1.10" inputmode="decimal" autocomplete="off"></div>
+      <div class="field"><label for="cidrIn">Prefijo CIDR (/0 a /32)</label>
+        <div class="row"><input id="cidrIn" type="number" min="0" max="32" value="24"><input id="cidrRange" type="range" min="0" max="32" value="24" aria-label="Deslizador de prefijo"></div></div>
+      <div class="row"><button class="btn p" type="submit">Calcular</button><button class="btn" type="button" id="copySubnet">Copiar resultado</button></div>
+      <p class="err" id="subErr"></p>
+    </form>
+    <table class="res-tbl" id="subTbl"></table>
+  </div>
+</section>
+
+<!-- RECURSOS -->
+<section id="recursos">
+  <div class="sh"><div><h2>Recursos recomendados</h2><p>Enlaces útiles para aprender y trabajar en redes y desarrollo web.</p></div></div>
+
+  <h3 class="group-t">📘 Aprender redes</h3>
+  <div class="rgrid res">
+    <a href="https://www.netacad.com/" target="_blank" rel="noopener"><span class="ri">🎓</span><div><b>Cisco Networking Academy</b><small>Cursos oficiales: CCNA, redes y ciberseguridad.</small></div><span class="ext">↗</span></a>
+    <a href="https://www.practicalnetworking.net/" target="_blank" rel="noopener"><span class="ri">📖</span><div><b>Practical Networking</b><small>Explicaciones claras de subnetting, VLAN y protocolos.</small></div><span class="ext">↗</span></a>
+    <a href="https://www.cloudflare.com/es-es/learning/" target="_blank" rel="noopener"><span class="ri">☁️</span><div><b>Cloudflare Learning Center</b><small>Conceptos de DNS, CDN, DDoS y seguridad.</small></div><span class="ext">↗</span></a>
+    <a href="https://www.rfc-editor.org/" target="_blank" rel="noopener"><span class="ri">📜</span><div><b>RFC Editor</b><small>Estándares oficiales de los protocolos de Internet.</small></div><span class="ext">↗</span></a>
+  </div>
+
+  <h3 class="group-t">🛠️ Herramientas de red</h3>
+  <div class="rgrid res">
+    <a href="https://www.wireshark.org/" target="_blank" rel="noopener"><span class="ri">🦈</span><div><b>Wireshark</b><small>Analizador de paquetes de código abierto.</small></div><span class="ext">↗</span></a>
+    <a href="https://www.speedtest.net/es" target="_blank" rel="noopener"><span class="ri">⚡</span><div><b>Speedtest</b><small>Mide velocidad de descarga, subida y latencia.</small></div><span class="ext">↗</span></a>
+    <a href="https://help.mikrotik.com/docs/" target="_blank" rel="noopener"><span class="ri">📶</span><div><b>MikroTik Docs</b><small>Manuales de RouterOS y equipos MikroTik.</small></div><span class="ext">↗</span></a>
+    <a href="https://www.ipaddressguide.com/cidr" target="_blank" rel="noopener"><span class="ri">🧮</span><div><b>IP Address Guide</b><small>Calculadoras CIDR y de rangos IP.</small></div><span class="ext">↗</span></a>
+  </div>
+
+  <h3 class="group-t">🇵🇪 Telecomunicaciones en Perú</h3>
+  <div class="rgrid res">
+    <a href="https://www.osiptel.gob.pe/" target="_blank" rel="noopener"><span class="ri">🏛️</span><div><b>OSIPTEL</b><small>Organismo regulador de las telecomunicaciones.</small></div><span class="ext">↗</span></a>
+    <a href="https://www.gob.pe/mtc" target="_blank" rel="noopener"><span class="ri">🏗️</span><div><b>MTC Perú</b><small>Ministerio de Transportes y Comunicaciones.</small></div><span class="ext">↗</span></a>
+    <a href="https://www.itu.int/es/Pages/default.aspx" target="_blank" rel="noopener"><span class="ri">🌍</span><div><b>UIT</b><small>Unión Internacional de Telecomunicaciones.</small></div><span class="ext">↗</span></a>
+    <a href="https://github.com/OscarCasahuaman1993" target="_blank" rel="noopener"><span class="ri">🐙</span><div><b>Mi GitHub</b><small>Proyectos y código fuente.</small></div><span class="ext">↗</span></a>
+  </div>
+</section>
+
+<!-- SOBRE MI -->
+<section id="sobre-mi">
+  <div class="sh"><div><h2>Sobre mí</h2></div></div>
+  <div class="about">
+    <div class="card" style="transform:none">
+      <p>Me llamo <b>Oscar Enrique Casahuaman Pinedo</b> y soy especialista en <b>Redes y Telecomunicaciones</b>. Me gusta entender cómo viaja la información, desde el cable hasta la aplicación, y convertir ese conocimiento en soluciones prácticas.</p>
+      <p>Este blog funciona como mi cuaderno de bitácora digital: documento problemas reales, comparto herramientas y publico guías para que otros puedan aprender más rápido.</p>
+      <h3 style="margin-top:1rem">Tecnologías y herramientas</h3>
+      <div class="skills">
+        <span class="skill">Redes LAN/WAN</span><span class="skill">TCP/IP</span><span class="skill">VLAN</span><span class="skill">Subnetting</span><span class="skill">Fibra óptica</span><span class="skill">Radioenlaces</span><span class="skill">Wireshark</span><span class="skill">HTML5 & CSS3</span><span class="skill">JavaScript</span><span class="skill">PHP</span><span class="skill">Git & GitHub</span><span class="skill">Vercel</span><span class="skill">Kotlin / Android</span><span class="skill">APIs REST</span>
+      </div>
+    </div>
+    <div class="card" style="transform:none">
+      <h3>Datos personales</h3>
+      <ul class="info" style="margin-top:.6rem">
+        <li><span>Nombre</span>Oscar Enrique</li>
+        <li><span>Apellidos</span>Casahuaman Pinedo</li>
+        <li><span>Especialidad</span>Redes y Telecomunicaciones</li>
+        <li><span>Cumpleaños</span>24 de agosto</li>
+        <li><span>Contacto</span>987 152 262</li>
+      </ul>
+      <div class="bday" id="bdayBox">🎂</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="sh"><div><h2>Contacto</h2><p>Escríbeme y te respondo por WhatsApp.</p></div></div>
+  <div class="card tool" style="transform:none">
+    <div>
+      <h3>¿Tienes un proyecto o una consulta?</h3>
+      <p style="color:var(--muted);margin:.5rem 0 1rem">Redes, telecomunicaciones, soporte técnico o desarrollo web. Cuéntame brevemente qué necesitas.</p>
+      <div class="actions">
+        <a class="btn" href="tel:+51987152262">📞 Llamar</a>
+        <button class="btn" id="copyPhone" type="button">📋 Copiar número</button>
+        <a class="btn" href="https://github.com/OscarCasahuaman1993" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <form id="contactForm">
+      <div class="field"><label for="cName">Tu nombre</label><input id="cName" required placeholder="Ej: María Pérez"></div>
+      <div class="field"><label for="cTopic">Tema</label>
+        <select id="cTopic"><option>Redes y Telecomunicaciones</option><option>Desarrollo web</option><option>Soporte técnico</option><option>Otro</option></select></div>
+      <div class="field"><label for="cMsg">Mensaje</label><textarea id="cMsg" required placeholder="Escribe tu mensaje..." style="min-height:100px"></textarea></div>
+      <button class="btn wa" type="submit" style="width:100%">Enviar por WhatsApp</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>© <span id="yr"></span> Oscar Enrique Casahuaman Pinedo · Redes y Telecomunicaciones<br>Hecho con HTML, CSS y JavaScript · Desplegado en Vercel</div>
+    <div><a href="#inicio">Inicio</a><a href="#articulos">Artículos</a><a href="#recursos">Recursos</a><a href="#contacto">Contacto</a><a href="https://github.com/OscarCasahuaman1993" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Volver arriba">↑</button>
+<div id="toast" role="status"></div>
+
+<!-- Lector -->
+<div class="ov" id="readerOv">
+  <div class="modal" id="readerModal">
+    <button class="x" data-close="readerOv" aria-label="Cerrar">✕</button>
+    <div class="pm"><span class="tag" id="mTag"></span><span class="date" id="mDate"></span></div>
+    <h2 id="mTitle"></h2>
+    <div class="body" id="mBody"></div>
+    <div class="mfoot">
+      <button class="btn sm" id="shareBtn">🔗 Compartir</button>
+      <button class="btn sm" id="copyArt">📋 Copiar texto</button>
+      <button class="btn sm wa" id="shareWa">💬 Enviar por WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- Editor -->
+<div class="ov" id="editorOv">
+  <div class="modal">
+    <button class="x" data-close="editorOv" aria-label="Cerrar">✕</button>
+    <h2 style="margin-bottom:1.2rem">Publicar nuevo artículo</h2>
+    <form id="postForm">
+      <div class="field"><label for="pTitle">Título</label><input id="pTitle" required maxlength="120" placeholder="Ej: Cómo configurar una VLAN"></div>
+      <div class="field"><label for="pCat">Categoría</label><select id="pCat"><option>Redes</option><option>Telecomunicaciones</option><option>Desarrollo Web</option><option>Backend & PHP</option><option>Despliegue</option></select></div>
+      <div class="field"><label for="pEx">Resumen corto</label><input id="pEx" required maxlength="200" placeholder="Breve descripción para la tarjeta"></div>
+      <div class="field"><label for="pTxt">Contenido (un párrafo por línea)</label><textarea id="pTxt" required placeholder="Escribe tu artículo..."></textarea></div>
+      <button class="btn p" type="submit" style="width:100%;padding:.75rem">Publicar en mi blog</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+const PHONE='51987152262';
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2200)}
+async function copy(text,msg){try{await navigator.clipboard.writeText(text)}catch(e){const a=document.createElement('textarea');a.value=text;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(_){}a.remove()}toast(msg||'Copiado')}
+const wa=text=>`https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+
+/* ---------- Tema ---------- */
+const root=document.documentElement,themeBtn=$('#themeBtn');
+function applyTheme(t){
+  if(t==='light')root.setAttribute('data-theme','light');else root.removeAttribute('data-theme');
+  themeBtn.textContent=t==='light'?'☀️ Claro':'🌙 Oscuro';
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='light'?'#f5f8fc':'#0b1120';
+}
+let theme=store.get('oscar_theme',null)||(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>{theme=theme==='light'?'dark':'light';store.set('oscar_theme',theme);applyTheme(theme)});
+if(window.matchMedia)matchMedia('(prefers-color-scheme: light)').addEventListener('change',e=>{if(!store.get('oscar_theme',null)){theme=e.matches?'light':'dark';applyTheme(theme)}});
+
+/* ---------- Menú móvil y navegación ---------- */
+const navLinks=$('#navLinks');
+$('#burger').addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+const secs=[...document.querySelectorAll('main section, header.hero')];
+const links=[...navLinks.querySelectorAll('a.l')];
+function onScroll(){
+  const h=document.documentElement,sc=h.scrollTop;
+  $('#scrollBar').style.width=(sc/(h.scrollHeight-h.clientHeight||1)*100)+'%';
+  $('#toTop').classList.toggle('show',sc>500);
+  let cur='inicio';secs.forEach(s=>{if(s.getBoundingClientRect().top<140)cur=s.id});
+  links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+$('#toTop').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+/* ---------- Foto con respaldo ---------- */
+$('#avatarImg').addEventListener('error',function(){const d=document.createElement('div');d.className='avatar-fb';d.textContent='OC';this.replaceWith(d)});
+
+/* ---------- Artículos ---------- */
+const defaults=[
+{id:'d1',title:'Qué es el subnetting y cómo calcular una subred paso a paso',category:'Redes',date:'17 Nov 2026',readTime:3,excerpt:'Aprende a dividir una red en subredes usando máscaras y prefijos CIDR, con un ejemplo práctico.',
+ content:`<p>El <strong>subnetting</strong> consiste en dividir una red grande en redes más pequeñas. Esto ordena el tráfico, mejora la seguridad y aprovecha mejor las direcciones IP.</p>
+ <h4>Ejemplo con 192.168.1.0/26</h4>
+ <p>Un prefijo <code>/26</code> usa 26 bits para la red y 6 bits para hosts. Eso da 2⁶ = 64 direcciones por subred, de las cuales 62 son utilizables.</p>
+ <pre>Red:        192.168.1.0
+Máscara:    255.255.255.192
+Broadcast:  192.168.1.63
+Hosts:      192.168.1.1 – 192.168.1.62</pre>
+ <p>Puedes comprobar tus cálculos con la <a href="#herramienta">calculadora de este blog</a> o aprender más en <a href="https://www.practicalnetworking.net/" target="_blank" rel="noopener">Practical Networking</a>.</p>`},
+{id:'d2',title:'Fibra óptica vs. cobre: cuándo conviene cada medio',category:'Telecomunicaciones',date:'15 Nov 2026',readTime:4,excerpt:'Comparación práctica entre fibra óptica, cable UTP y enlaces inalámbricos para distintos escenarios.',
+ content:`<p>Elegir el medio de transmisión correcto depende de la distancia, el ancho de banda y el presupuesto.</p>
+ <ul><li><strong>Cable UTP (Cat5e/Cat6):</strong> económico y fácil de instalar. Alcanza hasta 100 metros por tramo.</li><li><strong>Fibra óptica:</strong> mayor ancho de banda, inmune a interferencias electromagnéticas y con alcances de kilómetros.</li><li><strong>Enlaces inalámbricos:</strong> útiles cuando no es posible tender cable, aunque dependen de línea de vista y de la interferencia.</li></ul>
+ <p>Para conocer el marco general de las telecomunicaciones visita la <a href="https://www.itu.int/es/Pages/default.aspx" target="_blank" rel="noopener">UIT</a> y, para normativa en Perú, <a href="https://www.osiptel.gob.pe/" target="_blank" rel="noopener">OSIPTEL</a>.</p>`},
+{id:'d3',title:'Cómo usar Wireshark para diagnosticar problemas de red',category:'Redes',date:'13 Nov 2026',readTime:4,excerpt:'Filtros básicos y flujo de trabajo para encontrar la causa de lentitud, cortes y errores de conexión.',
+ content:`<p><a href="https://www.wireshark.org/" target="_blank" rel="noopener">Wireshark</a> permite capturar y analizar el tráfico que pasa por una interfaz de red.</p>
+ <h4>Filtros de visualización útiles</h4>
+ <pre>ip.addr == 192.168.1.10
+tcp.port == 443
+dns
+tcp.analysis.retransmission</pre>
+ <p>Empieza capturando unos segundos mientras reproduces el problema. Luego filtra por la IP del equipo afectado y busca retransmisiones, resets o respuestas DNS lentas.</p>`},
+{id:'d4',title:'Cómo desplegar proyectos web gratis con GitHub y Vercel',category:'Despliegue',date:'10 Nov 2026',readTime:3,excerpt:'Conecta tu repositorio de GitHub con Vercel y publica sitios estáticos con SSL automático.',
+ content:`<p>Hoy publicar una web no requiere servidores complejos. Guardas tu código en <strong>GitHub</strong> y lo conectas con <strong>Vercel</strong>; cada cambio que subas se despliega solo.</p>
+ <pre>git add .
+git commit -m "Actualización del blog"
+git push origin main</pre>
+ <p>Asegúrate de que tu archivo principal se llame <code>index.html</code> y de respetar mayúsculas y minúsculas en los nombres de imágenes. Más información en <a href="https://vercel.com/docs" target="_blank" rel="noopener">la documentación de Vercel</a>.</p>`},
+{id:'d5',title:'Organizando rutas y secciones en un portal de noticias con PHP',category:'Backend & PHP',date:'05 Nov 2026',readTime:4,excerpt:'Buenas prácticas para estructurar carpetas separando la lógica de cada categoría.',
+ content:`<p>Cuando un proyecto crece, tener todo en un solo archivo se vuelve difícil de mantener. Dividir por secciones facilita el trabajo.</p>
+ <pre>/api/
+ ├── index.php
+ └── secciones/
+      ├── ciencia.php
+      ├── deportes.php
+      └── economia.php</pre>
+ <p>Así, si necesitas corregir una consulta de deportes, sabes exactamente qué archivo editar. Puedes ver el proyecto en <a href="https://github.com/OscarCasahuaman1993/noticias" target="_blank" rel="noopener">GitHub</a>.</p>`},
+{id:'d6',title:'Por qué optimizar imágenes antes de subirlas a producción',category:'Desarrollo Web',date:'01 Nov 2026',readTime:2,excerpt:'Una foto de 3 MB puede ralentizar tu web en móviles. Aprende a reducir su peso sin perder calidad.',
+ content:`<p>Subir fotos directamente del celular sin comprimirlas es uno de los errores más comunes.</p>
+ <p><strong>Recomendación:</strong> conviértelas a formato <code>.webp</code> o pásalas por una herramienta de compresión. Es posible reducir el peso más de un 80% manteniendo buena nitidez. Guía completa en <a href="https://developer.mozilla.org/es/docs/Web/Performance/Multimedia" target="_blank" rel="noopener">MDN</a>.</p>`}
+];
+let custom=store.get('oscar_blog_custom',[]);
+let cat='Todos',current=null;
+const all=()=>[...custom,...defaults];
+
+function renderCats(){
+  const names=['Todos',...new Set(all().map(p=>p.category))];
+  if(!names.includes(cat))cat='Todos';
+  $('#cats').innerHTML=names.map(n=>`<button class="cat ${n===cat?'on':''}" data-cat="${esc(n)}">${esc(n)}</button>`).join('');
+  $('#stCats').textContent=names.length-1;
+}
+function renderPosts(){
+  const q=$('#search').value.trim().toLowerCase();
+  const list=all().filter(p=>(cat==='Todos'||p.category===cat)&&(p.title.toLowerCase().includes(q)||p.excerpt.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)));
+  $('#stPosts').textContent=all().length;
+  $('#posts').innerHTML=list.length?list.map(p=>`
+    <article class="card post"><div>
+      <div class="pm"><span class="tag">${esc(p.category)}</span><span class="date">${esc(p.date)}</span></div>
+      <h3>${esc(p.title)}</h3><p class="ex">${esc(p.excerpt)}</p></div>
+      <div class="pf"><span class="rt">⏱ ${p.readTime} min</span>
+      <span>${p.custom?`<button class="link del" data-del="${esc(p.id)}">Eliminar</button> `:''}<button class="link" data-read="${esc(p.id)}">Leer artículo →</button></span></div>
+    </article>`).join(''):'<p class="empty">No se encontraron artículos que coincidan con tu búsqueda.</p>';
+}
+$('#cats').addEventListener('click',e=>{const b=e.target.closest('.cat');if(!b)return;cat=b.dataset.cat;renderCats();renderPosts()});
+$('#search').addEventListener('input',renderPosts);
+$('#posts').addEventListener('click',e=>{
+  const r=e.target.closest('[data-read]'),d=e.target.closest('[data-del]');
+  if(r)openArticle(r.dataset.read);
+  if(d&&confirm('¿Eliminar este artículo?')){custom=custom.filter(p=>p.id!==d.dataset.del);store.set('oscar_blog_custom',custom);renderCats();renderPosts();toast('Artículo eliminado')}
+});
+
+/* ---------- Modales ---------- */
+function openOv(id){$('#'+id).classList.add('open');document.body.style.overflow='hidden'}
+function closeOv(id){$('#'+id).classList.remove('open');document.body.style.overflow=''}
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeOv(b.dataset.close)));
+document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeOv(o.id)}));
+addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.ov.open').forEach(o=>closeOv(o.id))});
+
+function openArticle(id){
+  const p=all().find(x=>x.id===id);if(!p)return;current=p;
+  $('#mTag').textContent=p.category;$('#mDate').textContent=`${p.date} · ${p.readTime} min de lectura`;
+  $('#mTitle').textContent=p.title;$('#mBody').innerHTML=p.content;
+  $('#readerModal').scrollTop=0;openOv('readerOv');
+}
+const plain=()=>current?`${current.title}\n\n${$('#mBody').innerText}`:'';
+$('#shareBtn').addEventListener('click',async()=>{
+  if(!current)return;const data={title:current.title,text:current.excerpt,url:location.href.split('#')[0]};
+  if(navigator.share){try{await navigator.share(data)}catch(e){}}else copy(`${current.title} – ${data.url}`,'Enlace copiado');
+});
+$('#copyArt').addEventListener('click',()=>copy(plain(),'Texto copiado'));
+$('#shareWa').addEventListener('click',()=>{if(current)window.open(`https://wa.me/?text=${encodeURIComponent(current.title+' – '+location.href.split('#')[0])}`,'_blank','noopener')});
+
+$('#writeBtn').addEventListener('click',()=>{navLinks.classList.remove('open');openOv('editorOv')});
+$('#postForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const txt=$('#pTxt').value;
+  const post={id:'c'+Date.now(),custom:true,title:$('#pTitle').value.trim(),category:$('#pCat').value,excerpt:$('#pEx').value.trim(),
+    date:new Date().toLocaleDateString('es-PE',{day:'2-digit',month:'short',year:'numeric'}),
+    readTime:Math.max(1,Math.ceil(txt.split(/\s+/).length/180)),
+    content:txt.split('\n').filter(l=>l.trim()).map(l=>`<p>${esc(l)}</p>`).join('')};
+  custom.unshift(post);store.set('oscar_blog_custom',custom);
+  e.target.reset();closeOv('editorOv');renderCats();renderPosts();toast('Artículo publicado');
+  location.hash='#articulos';
+});
+
+/* ---------- Calculadora de subredes ---------- */
+const ipIn=$('#ipIn'),cidrIn=$('#cidrIn'),cidrRange=$('#cidrRange');
+const toIP=n=>[n>>>24,(n>>>16)&255,(n>>>8)&255,n&255].join('.');
+const toBin=n=>[24,16,8,0].map(s=>((n>>>s)&255).toString(2).padStart(8,'0')).join('.');
+let lastText='';
+function calc(){
+  const err=$('#subErr');err.textContent='';
+  const parts=ipIn.value.trim().split('.');
+  const okIp=parts.length===4&&parts.every(p=>/^\d{1,3}$/.test(p)&&+p<=255);
+  const c=parseInt(cidrIn.value,10);
+  if(!okIp){err.textContent='Ingresa una IPv4 válida, por ejemplo 192.168.1.10';return}
+  if(isNaN(c)||c<0||c>32){err.textContent='El prefijo debe estar entre 0 y 32';return}
+  const ip=parts.reduce((a,p)=>((a<<8)|+p)>>>0,0);
+  const mask=c===0?0:(0xFFFFFFFF<<(32-c))>>>0;
+  const net=(ip&mask)>>>0,bc=(net|(~mask>>>0))>>>0;
+  const total=Math.pow(2,32-c);
+  const hosts=c>=31?(c===32?1:2):total-2;
+  const first=c>=31?net:net+1,last=c>=31?bc:bc-1;
+  const rows=[['Dirección de red',toIP(net)+'/'+c],['Máscara',toIP(mask)],['Máscara inversa (wildcard)',toIP(~mask>>>0)],['Broadcast',toIP(bc)],['Primer host',toIP(first)],['Último host',toIP(last)],['Hosts utilizables',hosts.toLocaleString('es-PE')],['Total de direcciones',total.toLocaleString('es-PE')],['Máscara en binario',toBin(mask)]];
+  $('#subTbl').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+  lastText=rows.map(r=>r.join(': ')).join('\n');
+}
+$('#subnetForm').addEventListener('submit',e=>{e.preventDefault();calc()});
+cidrIn.addEventListener('input',()=>{cidrRange.value=cidrIn.value;calc()});
+cidrRange.addEventListener('input',()=>{cidrIn.value=cidrRange.value;calc()});
+ipIn.addEventListener('input',calc);
+$('#copySubnet').addEventListener('click',()=>{calc();if(lastText)copy(lastText,'Resultado copiado')});
+calc();
+
+/* ---------- Contacto ---------- */
+$('#waHero').href=wa('Hola Oscar, vi tu blog y quisiera contactarte.');
+$('#copyPhone').addEventListener('click',()=>copy('987152262','Número copiado'));
+$('#contactForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const msg=`Hola Oscar, soy ${$('#cName').value.trim()}.\nTema: ${$('#cTopic').value}\n\n${$('#cMsg').value.trim()}`;
+  window.open(wa(msg),'_blank','noopener');
+});
+
+/* ---------- Cumpleaños (24 de agosto) ---------- */
+(function(){
+  const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  let next=new Date(now.getFullYear(),7,24);
+  if(next<today)next=new Date(now.getFullYear()+1,7,24);
+  const days=Math.round((next-today)/864e5);
+  $('#stBday').textContent=days===0?'¡Hoy!':days;
+  $('#bdayBox').innerHTML=days===0?'🎉 <b>¡Hoy es mi cumpleaños!</b>':`🎂 Mi próximo cumpleaños es el <b>24 de agosto de ${next.getFullYear()}</b>. Faltan <b>${days}</b> días.`;
+  $('#yr').textContent=now.getFullYear();
+})();
+
+renderCats();renderPosts();
+})();
+</script>
+</body>
+</html>
