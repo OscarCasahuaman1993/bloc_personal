@@ -3,7 +3,9 @@ handlers:
 - url: /
   static_files: index.html
   upload: index.html
+  mime_type: text/html
 
 - url: /(.*)
   static_files: \1
   upload: (.*)
+
